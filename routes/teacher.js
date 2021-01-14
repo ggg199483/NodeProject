@@ -1,4 +1,4 @@
-"use strict";
+//老师端路由
 
 var config = require('.././config'); //../表示上级目录
 var request = require('request');

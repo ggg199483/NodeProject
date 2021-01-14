@@ -1,14 +1,46 @@
-"use strict";
+//学生端路由
 
 var config = require('.././config'); //../表示上级目录
 var request = require('request');
 
 
 //res.render  跳转页面
-exports.login = function (req, res, next) {
-    res.render('student-login.html',{message:""});
+exports.loginHTML = function (req, res, next) {
+    res.render('./student/student-login.html',{message:""});
 	
 };
+exports.registerHTML = function (req, res, next) {
+    res.render('./student/student-register.html',{message:""});
+
+};
+
+//注册接口
+exports.register = function (req, res, next) {
+	var url = config.backUrl+':'+config.backPort+'/student/register';
+	console.log("url:"+url);
+	request({
+		url: url,
+		method: 'post',// 请求方式get
+		json: true,   //json格式传输
+		headers: req.headers,
+		body: JSON.stringify(req.body),
+	}, function(error, response, body) {
+		// 请求成功的处理逻辑
+		if (!error && response.statusCode == 200) {
+			console.log("注册成功");
+			// res.send(response);
+			res.send(response.body)
+		}else{
+			console.log("error")
+			res.writeHead(500,{"Content-Type":"text/html"});
+			res.write(error.toString());
+			res.end("");
+		}
+	});
+};
+
+
+
 
 //res.send  传递响应
 exports.onLogin = function (req, res, next) {
@@ -27,19 +59,22 @@ exports.onLogin = function (req, res, next) {
 		url: url,
 		method: 'get',// 请求方式get
 		json: true,   //json格式传输
-		headers: {
-			'content-type': 'application/json',
-		},
+		// headers: {
+		// 	'content-type': 'application/json',
+		//
+		// },
+		headers: req.headers,
 		body: JSON.stringify(requestData)
 	}, function(error, response, body) {
 		// 请求成功的处理逻辑
 		if (!error && response.statusCode == 200) {
-			console.log(body);
-			res.send(body);   //成功响应传递  不写就没响应返回了
+			res.send(response);
+
+
 		}else{
 			console.log("error")
-			res.writeHead(500,{"Content-Type":"text/html"});//响应异常处理  状态码500设置
-			res.write(error.toString()); //响应错误信息转发
+			res.writeHead(500,{"Content-Type":"text/html"});
+			res.write(error.toString());
 			res.end("");
 		}
 	});

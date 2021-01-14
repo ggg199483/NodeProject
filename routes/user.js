@@ -1,4 +1,4 @@
-"use strict";
+//"首页路由;
 
 var config = require('.././config'); //../表示上级目录
 var request = require('request');
@@ -6,15 +6,16 @@ var request = require('request');
 
 //res.render  跳转页面
 exports.login = function (req, res, next) {
-	console.log('exp login!');
-    res.render('login.html',{message:""});
+	console.log('有用户到首页了!');
+
+	res.render('index.html',{message:""});
 	
 };
 
 //res.send  传递响应
 exports.onLogin = function (req, res, next) {
-	console.log('exp onlogin!');
-	console.log(config.backPort)
+	console.log('user onlogin!');
+
 	
 	//
 
@@ -36,7 +37,7 @@ exports.onLogin = function (req, res, next) {
 		// 请求成功的处理逻辑
 		if (!error && response.statusCode == 200) {
 			console.log(body);
-			res.send(body);   //成功响应传递  不写就没响应返回了
+			res.send(response);   //成功响应传递  不写就没响应返回了
 		}else{
 			console.log("error")
 			res.writeHead(500,{"Content-Type":"text/html"});//响应异常处理  状态码500设置

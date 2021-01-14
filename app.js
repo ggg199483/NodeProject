@@ -24,26 +24,29 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+//静态文件转发用  js css 图片之类的
 app.use(express.static(path.join(__dirname, 'public')));
 //引入routes路由
 app.use('/', router);
 
 
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
+
+
+
+//异常处理 暂时不开启
+// app.use(function (err, req, res, next) {
+//   console.error(err.stack)
+//   var body = createHtmlDocument(err.stack)
+//   res.end(body, 'utf8')
 //
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+//   sendErrCourier(err.stack)
+// })
 
 
 
-//启动js换成了www  在bin目录下 www和app只能开启一个 否则会启动两个服务端口
+
+//启动js换成了www  在bin目录下 www和app只能开启一个 否则会启动两个服务端口 用idea启动 下面的app入口要关闭
 // http.createServer(app).listen(config.port, function(){
 //   console.log(config.port);
 //
