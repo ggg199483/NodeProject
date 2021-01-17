@@ -78,10 +78,87 @@ exports.onLogin = function (req, res, next) {
 			res.end("");
 		}
 	});
-	
+
+
+
+
+
 
 };
 
 
+exports.test2 = function (req, res, next) {
+	var url = config.backUrl+':'+config.backPort+'/student/test2';
+	console.log("url:"+url);
+	request({
+		url: url,
+		method: 'get',// 请求方式get
+		json: true,   //json格式传输
+		headers: req.headers,
+		body: JSON.stringify(req.body),
+	}, function(error, response, body) {
+		// 请求成功的处理逻辑
+		if (!error && response.statusCode == 200) {
+			console.log("注册成功");
+			// res.send(response);
+			res.send(response.body)
+		}else{
+			console.log("error")
+			res.writeHead(500,{"Content-Type":"text/html"});
+			res.write(error.toString());
+			res.end("");
+		}
+	});
+};
 
+exports.test3 = function (req, res, next) {
+	var url = config.backUrl+':'+config.backPort+'/student/test3';
+	console.log("url:"+url);
+	request({
+		url: url,
+		method: 'post',// 请求方式get
+		json: true,   //json格式传输
+		headers: req.header,
+		// body: JSON.stringify(req.body),
+		body: req.body,
+	}, function(error, response, body) {
+		// 请求成功的处理逻辑
+		if (!error && response.statusCode == 200) {
+			console.log("测试成功");
+			// res.send(response);
+			res.send(response.body)
+		}else{
+			console.log("error")
+			res.writeHead(500,{"Content-Type":"text/html"});
+			res.write(error);
+			res.end("");
+		}
+	});
+};
+
+
+exports.test4 = function (req, res, next) {
+	var url = config.backUrl+':'+config.backPort+'/student/test4';
+	console.log("url:"+url);
+	request({
+		url: url,
+		method: 'post',// 请求方式get
+		json: true,   //json格式传输
+		headers: req.header,
+		// body: JSON.stringify(req.body),
+		body: req.body,
+	}, function(error, response, body) {
+		// 请求成功的处理逻辑
+		if (!error && response.statusCode == 200) {
+			console.log("测试成功");
+			// res.send(response);
+			res.send(response.body)
+		}else{
+			console.log("error")
+			res.writeHead(500,{"Content-Type":"text/html"});
+			res.write(error);
+			res.end("");
+		}
+	});
+};
 

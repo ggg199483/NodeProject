@@ -22,7 +22,11 @@ router.get('/onLogin', user.onLogin);
 router.get('/student/register.html', student.registerHTML);
 router.get('/student/login.html', student.loginHTML);
 router.get('/student/onLogin', student.onLogin);
-router.post('/student/register',student.register)
+router.post('/student/register',student.register);
+router.post('/student/login',student.onLogin);
+router.get('/student/test2',student.test2);
+router.post('/student/test3',student.test3);
+router.post('/student/test4',student.test4);
 
 
 
